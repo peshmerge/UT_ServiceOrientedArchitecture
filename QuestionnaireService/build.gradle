@@ -24,6 +24,8 @@ dependencies {
 	compile 'io.swagger.core.v3:swagger-jaxrs2:2.1.7'
 	compile 'org.springdoc:springdoc-openapi-ui:1.5.5'
 	compile 'commons-collections:commons-collections:3.2.1'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 test {
