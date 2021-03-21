@@ -13,7 +13,7 @@ services:
     ports:
       - "6033:3306"
     volumes:
-      - questionnaireServiceDataVolume:/home/soa/project/data/feebackServiceDB
+      - questionnaireServiceDataVolume:/home/soa/project/data/questionnaireServiceDB
 #Un-commit this to run adminer to manager mysql
 #  adminer:
 #    image: adminer
