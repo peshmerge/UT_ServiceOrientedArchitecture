@@ -1,5 +1,6 @@
 package com.utwente.ratefy.QuestionnaireService.models;
 
+import java.time.Instant;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -19,6 +20,12 @@ public class Questionnaire {
 
   @Column(name = "reward_id")
   private Integer rewardId;
+
+  @Column(name = "created_at")
+  private Instant createdAt = Instant.now();
+
+  @Column(name = "updated_at")
+  private Instant updatedAt;
 
   public Questionnaire() {}
 
@@ -65,6 +72,21 @@ public class Questionnaire {
     this.rewardId = rewardId;
   }
 
+  public Instant getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(Instant createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public Instant getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(Instant updatedAt) {
+    this.updatedAt = updatedAt;
+  }
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {

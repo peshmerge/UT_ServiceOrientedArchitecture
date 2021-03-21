@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -99,6 +100,7 @@ public class QuestionnaireController {
     updatedQuestionnaire.setTitle(incomingQuestionnaire.getTitle());
     updatedQuestionnaire.setContent(incomingQuestionnaire.getContent());
     updatedQuestionnaire.setRewardId(incomingQuestionnaire.getRewardId());
+    updatedQuestionnaire.setUpdatedAt(Instant.now());
     questionnaireService.save(updatedQuestionnaire);
     return ResponseEntity.status(HttpStatus.OK).body(updatedQuestionnaire);
   }
