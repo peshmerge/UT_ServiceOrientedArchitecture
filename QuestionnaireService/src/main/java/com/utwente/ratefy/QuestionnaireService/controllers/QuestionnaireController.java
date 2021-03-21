@@ -23,7 +23,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(
     path = {"/v1/questionnaires"},
     produces = APPLICATION_JSON_VALUE)
-public class FeedbackController {
+public class QuestionnaireController {
 
   @Autowired private IQuestionnaireService questionnaireService;
 
