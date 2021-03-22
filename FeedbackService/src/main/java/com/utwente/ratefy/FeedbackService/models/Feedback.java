@@ -1,9 +1,14 @@
 package com.utwente.ratefy.FeedbackService.models;
 
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.time.Instant;
 import java.util.Objects;
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "feedbacks")
 public class Feedback {
@@ -21,7 +26,8 @@ public class Feedback {
   @Column(name = "questionnaire_id")
   private Integer questionnaireId;
 
-  @Column(name = "created_at")
+  @CreationTimestamp
+  @Column(name = "created_at", updatable = false, nullable = false)
   private Instant createdAt = Instant.now();
 
   @Column(name = "updated_at")

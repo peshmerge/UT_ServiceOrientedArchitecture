@@ -17,6 +17,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.projectlombok:lombok:1.18.16'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -26,6 +27,8 @@ dependencies {
 	compile 'commons-collections:commons-collections:3.2.1'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	implementation "org.mapstruct:mapstruct:1.4.2.Final"
+	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
 }
 
 test {
