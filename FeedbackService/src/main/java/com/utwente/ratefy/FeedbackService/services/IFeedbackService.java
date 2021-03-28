@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface IFeedbackService {
 
-  List<Feedback> findAll();
+    List<Feedback> findAll();
 
-  Optional<Feedback> findById(Integer id);
+    Optional<Feedback> findById(Integer id);
 
-  Feedback save(Feedback feedback);
+    Feedback save(Feedback feedback);
 
-  void delete(Integer id);
+    void deleteById(Integer id);
 }

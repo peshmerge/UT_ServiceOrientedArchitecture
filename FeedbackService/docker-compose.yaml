@@ -15,11 +15,11 @@ services:
     volumes:
       - feedbackServiceDataVolume:/home/soa/project/data/feedbackServiceDB
 #Un-commit this to run adminer to manager mysql
-#  adminer:
-#    image: adminer
-#    restart: on-failure
-#    ports:
-#      - 8081:8080
+  adminer:
+    image: adminer
+    restart: on-failure
+    ports:
+      - 8081:8080
 volumes:
   feedbackServiceDataVolume:
 

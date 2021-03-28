@@ -13,14 +13,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
 import java.time.Instant;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -40,6 +38,7 @@ public class FeedbackExceptionHandler extends ResponseEntityExceptionHandler {
   private static final String MESSAGE = "message";
   private static final String TIMESTAMP = "timestamp";
   private static final String TYPE = "type";
+
 
   @Override
   protected ResponseEntity<Object> handleMethodArgumentNotValid(

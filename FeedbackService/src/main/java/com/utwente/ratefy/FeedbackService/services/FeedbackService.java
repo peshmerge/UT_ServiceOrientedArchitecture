@@ -11,25 +11,26 @@ import java.util.Optional;
 @Service
 public class FeedbackService implements IFeedbackService {
 
-  @Autowired private FeedbackRepository feedbackRepository;
+    @Autowired
+    private FeedbackRepository feedbackRepository;
 
-  @Override
-  public List<Feedback> findAll() {
-    return feedbackRepository.findAll();
-  }
+    @Override
+    public List<Feedback> findAll() {
+        return feedbackRepository.findAll();
+    }
 
-  @Override
-  public Optional<Feedback> findById(Integer id) {
-    return feedbackRepository.findById(id);
-  }
+    @Override
+    public Optional<Feedback> findById(Integer id) {
+        return feedbackRepository.findById(id);
+    }
 
-  @Override
-  public Feedback save(Feedback feedback) {
-    return feedbackRepository.save(feedback);
-  }
+    @Override
+    public Feedback save(Feedback feedback) {
+        return feedbackRepository.save(feedback);
+    }
 
-  @Override
-  public void delete(Integer id) {
-    feedbackRepository.deleteById(id);
-  }
+    @Override
+    public void deleteById(Integer id) {
+        feedbackRepository.deleteById(id);
+    }
 }
