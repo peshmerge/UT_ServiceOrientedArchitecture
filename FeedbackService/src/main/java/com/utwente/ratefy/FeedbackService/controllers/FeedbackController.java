@@ -15,7 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -32,13 +34,15 @@ public class FeedbackController {
 
     @Autowired
     private IFeedbackService feedbackService;
+
     @Autowired
     private FeedbackMapper feedbackMapper;
+
 
     @GetMapping
     @Operation(summary = "Get all feedbacks")
     public ResponseEntity<List<FeedbackDto>> findAll() {
-        System.out.println(feedbackService.findAll());
+
         return ResponseEntity.ok(feedbackMapper.toDTOs(feedbackService.findAll()));
     }
 
@@ -73,7 +77,10 @@ public class FeedbackController {
                             schema = @Schema(implementation = Feedback.class))
             })
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Feedback> createFeedback(@Validated @RequestBody Feedback feedback) {
+    public ResponseEntity<Feedback> createFeedback(@Validated @Valid @RequestBody Feedback feedback) throws Exception {
+//        if (!questionnaireExists(feedback.getQuestionnaireId())){
+//            throw new Exception("Questionnaire doesn't exist");
+//        }
         final Feedback createdFeedback = feedbackService.save(feedback);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdFeedback);
     }
@@ -121,5 +128,11 @@ public class FeedbackController {
         }
         feedbackService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+    }
+
+    private boolean questionnaireExists(int questionnaireId) {
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Object> responseEntity = restTemplate.getForEntity("http://localhost:9091/v1/questionnaires/" + questionnaireId, Object.class);
+        return responseEntity.getStatusCode().is2xxSuccessful();
     }
 }

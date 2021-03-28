@@ -1,44 +1,44 @@
 package com.utwente.ratefy.FeedbackService.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.Instant;
+import java.util.List;
 
 @Data
 public class FeedbackDto {
 
+    @JsonProperty("id")
     private int id;
 
-    @JsonProperty(required = true)
+    @JsonProperty("content")
     @NotEmpty
     @NotBlank
-    private String content;
+    private List<FeedbackContentItem> content;
 
-    @JsonProperty(required = true)
+    @JsonProperty("student_id")
     @NotNull
     private Integer studentId;
 
-    @JsonProperty(required = true)
+    @JsonProperty("questionnaire_id")
     @NotEmpty
     @NotBlank
     private Integer questionnaireId;
 
-    @JsonProperty(required = true)
+    @JsonProperty("created_at")
     @NotNull
     @PastOrPresent
     private Instant createdAt;
 
-    @JsonProperty(required = true)
+    @JsonProperty("updated_at")
     private Instant updatedAt;
 
-    public FeedbackDto(int id, @NotEmpty @NotBlank String content, @NotNull Integer studentId, @NotEmpty @NotBlank Integer questionnaireId, @NotNull @PastOrPresent Instant createdAt, Instant updatedAt) {
+    public FeedbackDto(int id, @NotEmpty @NotBlank List<FeedbackContentItem> content, @NotNull Integer studentId, @NotEmpty @NotBlank Integer questionnaireId, @NotNull @PastOrPresent Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.content = content;
         this.studentId = studentId;
