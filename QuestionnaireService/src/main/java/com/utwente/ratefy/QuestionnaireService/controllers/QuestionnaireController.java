@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.time.Instant;
@@ -23,6 +24,7 @@ import java.util.Optional;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping(
         path = {"/v1/questionnaires"},
         produces = APPLICATION_JSON_VALUE)
@@ -33,6 +35,9 @@ public class QuestionnaireController {
 
     @Autowired
     private QuestionnaireMapper questionnaireMapper;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     @GetMapping
     @Operation(summary = "Get all questionnaires")

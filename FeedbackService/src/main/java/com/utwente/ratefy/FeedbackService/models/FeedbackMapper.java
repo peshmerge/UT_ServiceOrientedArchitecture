@@ -13,5 +13,5 @@ public interface FeedbackMapper {
 
     List<FeedbackDto> toDTOs(List<Feedback> feedbacks);
 
-    Feedback toFeedback(FeedbackDto feedbackDto);
+    Feedback toEntity(FeedbackDto feedbackDto);
 }

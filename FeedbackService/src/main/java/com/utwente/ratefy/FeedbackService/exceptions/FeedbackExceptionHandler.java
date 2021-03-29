@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
@@ -29,8 +28,7 @@ public class FeedbackExceptionHandler extends ResponseEntityExceptionHandler {
   public static final String ERROR_MESSAGE_TEMPLATE = "message: %s %n requested uri: %s";
   public static final String LIST_JOIN_DELIMITER = ",";
   public static final String FIELD_ERROR_SEPARATOR = ": ";
-  private static final Logger local_logger =
-      LoggerFactory.getLogger(FeedbackExceptionHandler.class);
+  private static final Logger local_logger = LoggerFactory.getLogger(FeedbackExceptionHandler.class);
   private static final String ERRORS_FOR_PATH = "errors {} for path {}";
   private static final String PATH = "path";
   private static final String ERRORS = "error";
@@ -79,15 +77,12 @@ public class FeedbackExceptionHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler({Exception.class})
   public ResponseEntity<Object> handleAllExceptions(Exception exception, WebRequest request) {
     ResponseStatus responseStatus = exception.getClass().getAnnotation(ResponseStatus.class);
-    final HttpStatus status =
-        responseStatus != null ? responseStatus.value() : HttpStatus.INTERNAL_SERVER_ERROR;
+    final HttpStatus status = responseStatus != null ? responseStatus.value() : HttpStatus.INTERNAL_SERVER_ERROR;
     final String localizedMessage = exception.getLocalizedMessage();
     final String path = request.getDescription(false);
-    String message =
-        (StringUtils.isNotEmpty(localizedMessage) ? localizedMessage : status.getReasonPhrase());
+    String message = (StringUtils.isNotEmpty(localizedMessage) ? localizedMessage : status.getReasonPhrase());
     logger.error(String.format(ERROR_MESSAGE_TEMPLATE, message, path), exception);
-    return getExceptionResponseEntity(
-        exception, status, request, Collections.singletonList(message));
+    return getExceptionResponseEntity(exception, status, request, Collections.singletonList(message));
   }
 
   /** Build a detailed information about the exception in the response */
@@ -96,6 +91,7 @@ public class FeedbackExceptionHandler extends ResponseEntityExceptionHandler {
       final HttpStatus status,
       final WebRequest request,
       final List<String> errors) {
+    System.out.println(exception);
     final Map<String, Object> body = new LinkedHashMap<>();
     final String path = request.getDescription(false);
     body.put(TIMESTAMP, Instant.now());
