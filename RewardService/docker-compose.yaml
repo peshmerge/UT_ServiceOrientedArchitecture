@@ -11,7 +11,7 @@ services:
       MYSQL_USER: reward_db_user
       MYSQL_PASSWORD: reward_db_user_pass
     ports:
-      - "6035:3306"
+      - "6036:3306"
     volumes:
       - rewardServiceDataVolume:/home/soa/project/data/rewardServiceDB
 #Un-commit this to run adminer to manager mysql

@@ -11,7 +11,7 @@ services:
       MYSQL_USER: feedback_db_user
       MYSQL_PASSWORD: feedback_db_user_pass
     ports:
-      - "6033:3306"
+      - "6034:3306"
     volumes:
       - feedbackServiceDataVolume:/home/soa/project/data/feedbackServiceDB
 #Un-commit this to run adminer to manager mysql
