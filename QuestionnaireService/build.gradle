@@ -32,7 +32,7 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	implementation "org.mapstruct:mapstruct:1.4.2.Final"
 	annotationProcessor "org.mapstruct:mapstruct-processor:1.4.2.Final"
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	compile 'org.json:json:20201115'
 	implementation 'com.vladmihalcea:hibernate-types-52:2.10.3'
 }
