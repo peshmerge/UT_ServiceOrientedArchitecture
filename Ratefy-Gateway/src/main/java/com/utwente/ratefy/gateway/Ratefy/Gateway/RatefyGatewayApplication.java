@@ -35,6 +35,11 @@ public class RatefyGatewayApplication {
                         .filters(f -> f.stripPrefix(1))
                         .uri("http://localhost:9093/v1/rewards/"))
 
+                .route("schedule-service", r -> r
+                        .path("/api/v1/schedules/**")
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("http://localhost:9094/v1/schedules/"))
+
                 .route("user-service", r -> r
                         .path("/api/v1/users/**")
                         .filters(f -> f.stripPrefix(1))
