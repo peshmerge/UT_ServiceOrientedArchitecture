@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: ratefy.dev
+      http:
+        paths:
+          - path: /v1/feedbacks/
+            backend:
+              serviceName: feedback-service
+              servicePort: 80

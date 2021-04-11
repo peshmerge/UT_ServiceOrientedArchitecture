@@ -24,3 +24,9 @@ hs_err_pid*
 
 # .idea files
 .idea/
+
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/

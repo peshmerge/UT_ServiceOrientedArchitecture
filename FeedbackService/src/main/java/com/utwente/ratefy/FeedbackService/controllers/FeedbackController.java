@@ -12,7 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -45,8 +45,8 @@ public class FeedbackController {
     @Autowired
     RestTemplate restTemplate;
 
-    @Autowired
-    private Environment env;
+    @Value("${questionnaire-service-host}")
+    String questionnaireService;
 
     @GetMapping
     @Operation(summary = "Get all feedbacks")
@@ -146,8 +146,7 @@ public class FeedbackController {
 
     private boolean questionnaireExists(int questionnaireId) {
         try {
-            ResponseEntity<Object> responseEntity = restTemplate.getForEntity(
-                    env.getProperty("questionnaire-service-name") + questionnaireId, Object.class);
+            ResponseEntity<Object> responseEntity = restTemplate.getForEntity(questionnaireService + questionnaireId, Object.class);
             return responseEntity.getStatusCode().is2xxSuccessful();
         } catch (HttpClientErrorException errorException) {
             return false;
