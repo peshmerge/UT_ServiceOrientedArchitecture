@@ -1,0 +1,8 @@
+com/utwente/ratefy/UserService/UserRepository.java
+ com.utwente.ratefy.UserService.UserRepository
+com/utwente/ratefy/UserService/UserServiceApplication.java
+ com.utwente.ratefy.UserService.UserServiceApplication
+com/utwente/ratefy/UserService/User.java
+ com.utwente.ratefy.UserService.User
+com/utwente/ratefy/UserService/UserController.java
+ com.utwente.ratefy.UserService.UserController
