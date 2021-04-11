@@ -1,0 +1,12 @@
+#Check for remotes.
+git checkout -b <BRANCH_NAME> 
+git remote -v
+git remote add origin https://github.com/peshmerge/UT_ServiceOrientedArchitecture
+git fetch origin 
+git push --set-upstream origin feature/student-service 
+
+
+
+
+git rm --cached StudentService -r
+
