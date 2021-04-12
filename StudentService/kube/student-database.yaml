@@ -1,0 +1,73 @@
+# Check this url https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: student-service-mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-service-db
+spec:
+  selector:
+    app: student-mysql-app
+  ports:
+    - port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-mysql-deployment
+spec:
+  selector:
+    matchLabels:
+      app: student-mysql-app
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: student-mysql-app
+        tier: backend
+    spec:
+      containers:
+        - name: student-mysql-app
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: student-servicedb-login
+                  key: databaseName
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: student-servicedb-login
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: student-servicedb-login
+                  key: password
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: student-servicedb-login
+                  key: rootPassword
+          volumeMounts:
+            - name: student-data-volume
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: student-data-volume
+          persistentVolumeClaim:
+            claimName: student-service-mysql-pvc
