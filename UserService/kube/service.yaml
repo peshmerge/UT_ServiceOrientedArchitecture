@@ -1,0 +1,58 @@
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-app
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: user-app
+        tier: backend
+    spec:
+      containers:
+        - name: user-app
+          image: peshmerge/user-service:1.0.0
+          ports:
+            - containerPort: 9095
+              name: service-port
+          env:
+            - name: USER_SERVICE_DB
+              value: user-service-db:3306/user_db?autoReconnect=true
+            - name: USER_SERVICE_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: user-servicedb-login
+                  key: username
+            - name: USER_SERVICE_DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: user-servicedb-login
+                  key: password
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              port: service-port
+              path: /actuator/health
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
+---
+# ... Service YAML definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-app
+    tier: backend
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 9095
+  type: ClusterIP

@@ -1,16 +1,29 @@
-version: '3'
+version: "3.9"
 services:
-  db:
+  userServiceDB:
     image: mysql:5.7
-    container_name: db
+    container_name: userServiceDB
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: user_db
       MYSQL_USER: user_db_user
       MYSQL_PASSWORD: user_db_user_pass
     ports:
-      - "6033:3306"
+      - "6038:3306"
     volumes:
-      - UserServiceData:/Users/hugos/Desktop/AsusHugo2020/Twente/2020/SOWS/Project/JavaWorkSpace/UserService
+      - userkServiceDataVolume:/home/soa/project/data/userServiceDB
+#Un-commit this to run adminer to manager mysql
+  adminer:
+    image: adminer
+    restart: on-failure
+    ports:
+      - 8085:8080
 volumes:
-  UserServiceData:
+  userkServiceDataVolume:
+
+networks:
+  default:
+    external:
+      name: ratefy-network
