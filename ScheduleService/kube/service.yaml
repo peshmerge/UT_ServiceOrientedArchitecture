@@ -1,0 +1,58 @@
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schedule-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: schedule-app
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: schedule-app
+        tier: backend
+    spec:
+      containers:
+        - name: schedule-app
+          image: peshmerge/schedule-service:1.0.0
+          ports:
+            - containerPort: 9094
+              name: service-port
+          env:
+            - name: SCHEDULE_SERVICE_DB
+              value: schedule-service-db:3306/schedule_db?autoReconnect=true
+            - name: SCHEDULE_SERVICE_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: schedule-servicedb-login
+                  key: username
+            - name: SCHEDULE_SERVICE_DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: schedule-servicedb-login
+                  key: password
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              port: service-port
+              path: /actuator/health
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
+---
+# ... Service YAML definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: schedule-service
+spec:
+  selector:
+    app: schedule-app
+    tier: backend
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 9094
+  type: ClusterIP
