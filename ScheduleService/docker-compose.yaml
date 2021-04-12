@@ -1,0 +1,26 @@
+version: '3'
+services:
+  scheduleServiceDB:
+    image: mysql:5.7
+    container_name: scheduleServiceDB
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: schedule_db
+      MYSQL_USER: schedule_db_user
+      MYSQL_PASSWORD: schedule_db_user_pass
+    ports:
+      - "6037:3306"
+    volumes:
+      - scheduldServiceDataVolume:/home/soa/project/data/scheduleServiceDB
+#Un-commit this to run adminer to manager mysql
+  adminer:
+    image: adminer
+    restart: on-failure
+    ports:
+      - 8084:8080
+volumes:
+  scheduldServiceDataVolume:
+
+
