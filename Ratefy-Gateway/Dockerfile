@@ -27,17 +27,6 @@ ARG DEPENDENCY=/app/build/dependency
 COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
-ENV PORT 9091
-EXPOSE 9091
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.utwente.ratefy.FeedbackService.FeedbackServiceApplication"]
-
-#FROM amazoncorretto:11
-#ARG WORK_DIR=.
-#COPY . ${WORK_DIR}
-#WORKDIR ${WORK_DIR}
-#CMD ./gradlew bootJar
-#ARG JAR_FILE=build/libs/*.jar
-#COPY ${JAR_FILE} /app.jar
-#ENV PORT 9091
-#EXPOSE 9091
-#ENTRYPOINT ["java","-jar","/app.jar"]
+ENV PORT 9090
+EXPOSE 9090
+ENTRYPOINT ["java","-cp","app:app/lib/*","com.utwente.ratefy.gateway.Ratefy.Gateway.RatefyGatewayApplication"]

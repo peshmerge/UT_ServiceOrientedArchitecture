@@ -1,0 +1,60 @@
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: questionnaire-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: questionnaire-app
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: questionnaire-app
+        tier: backend
+    spec:
+      containers:
+        - name: questionnaire-app
+          image: peshmerge/questionnaire-service:1.0.0
+          ports:
+            - containerPort: 9092
+              name: service-port
+          env:
+            - name: QUESTIONNAIRE_SERVICE_DB
+              value: questionnaire-service-db:3306/questionnaire_db?autoReconnect=true
+            - name: REWARD_SERVICE_HOST
+              value: http://reward-service/v1/rewards/
+            - name: QUESTIONNAIRE_SERVICE_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: questionnaire-servicedb-login
+                  key: username
+            - name: QUESTIONNAIRE_SERVICE_DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: questionnaire-servicedb-login
+                  key: password
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              port: service-port
+              path: /actuator/health
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
+---
+# ... Service YAML definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: questionnaire-service
+spec:
+  selector:
+    app: questionnaire-app
+    tier: backend
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 9092
+  type: ClusterIP

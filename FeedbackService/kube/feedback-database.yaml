@@ -1,0 +1,73 @@
+# Check this url https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: feedback-service-mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: feedback-service-db
+spec:
+  selector:
+    app: feedback-mysql-app
+  ports:
+    - port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feedback-mysql-deployment
+spec:
+  selector:
+    matchLabels:
+      app: feedback-mysql-app
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: feedback-mysql-app
+        tier: backend
+    spec:
+      containers:
+        - name: feedback-mysql-app
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: feedback-servicedb-login
+                  key: databaseName
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: feedback-servicedb-login
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: feedback-servicedb-login
+                  key: password
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: feedback-servicedb-login
+                  key: rootPassword
+          volumeMounts:
+            - name: feedback-data-volume
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: feedback-data-volume
+          persistentVolumeClaim:
+            claimName: feedback-service-mysql-pvc

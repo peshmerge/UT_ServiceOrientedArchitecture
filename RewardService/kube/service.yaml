@@ -1,0 +1,58 @@
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reward-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reward-app
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: reward-app
+        tier: backend
+    spec:
+      containers:
+        - name: reward-app
+          image: peshmerge/reward-service:1.0.0
+          ports:
+            - containerPort: 9093
+              name: service-port
+          env:
+            - name: REWARD_SERVICE_DB
+              value: reward-service-db:3306/reward_db?autoReconnect=true
+            - name: REWARD_SERVICE_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: reward-servicedb-login
+                  key: username
+            - name: REWARD_SERVICE_DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: reward-servicedb-login
+                  key: password
+          imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              port: service-port
+              path: /actuator/health
+            initialDelaySeconds: 20
+            timeoutSeconds: 5
+---
+# ... Service YAML definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: reward-service
+spec:
+  selector:
+    app: reward-app
+    tier: backend
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 9093
+  type: ClusterIP

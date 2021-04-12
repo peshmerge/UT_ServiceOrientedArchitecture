@@ -1,0 +1,73 @@
+# Check this url https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: schedule-service-mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: schedule-service-db
+spec:
+  selector:
+    app: schedule-mysql-app
+  ports:
+    - port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schedule-mysql-deployment
+spec:
+  selector:
+    matchLabels:
+      app: schedule-mysql-app
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: schedule-mysql-app
+        tier: backend
+    spec:
+      containers:
+        - name: schedule-mysql-app
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: schedule-servicedb-login
+                  key: databaseName
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: schedule-servicedb-login
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: schedule-servicedb-login
+                  key: password
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: schedule-servicedb-login
+                  key: rootPassword
+          volumeMounts:
+            - name: schedule-data-volume
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: schedule-data-volume
+          persistentVolumeClaim:
+            claimName: schedule-service-mysql-pvc

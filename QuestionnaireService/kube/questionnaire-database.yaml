@@ -1,0 +1,73 @@
+# Check this url https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: questionnaire-service-mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: questionnaire-service-db
+spec:
+  selector:
+    app: questionnaire-mysql-app
+  ports:
+    - port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: questionnaire-mysql-deployment
+spec:
+  selector:
+    matchLabels:
+      app: questionnaire-mysql-app
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: questionnaire-mysql-app
+        tier: backend
+    spec:
+      containers:
+        - name: questionnaire-mysql-app
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: questionnaire-servicedb-login
+                  key: databaseName
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: questionnaire-servicedb-login
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: questionnaire-servicedb-login
+                  key: password
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: questionnaire-servicedb-login
+                  key: rootPassword
+          volumeMounts:
+            - name: questionnaire-data-volume
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: questionnaire-data-volume
+          persistentVolumeClaim:
+            claimName: questionnaire-service-mysql-pvc

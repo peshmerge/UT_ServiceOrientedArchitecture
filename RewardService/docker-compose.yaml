@@ -23,4 +23,7 @@ services:
 volumes:
   rewardServiceDataVolume:
 
-
+networks:
+  default:
+    external:
+      name: ratefy-network

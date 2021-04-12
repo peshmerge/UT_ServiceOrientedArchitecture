@@ -24,3 +24,7 @@ volumes:
   questionnaireServiceDataVolume:
 
 
+networks:
+  default:
+    external:
+      name: ratefy-network

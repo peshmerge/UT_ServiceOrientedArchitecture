@@ -1,0 +1,73 @@
+# Check this url https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: reward-service-mysql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reward-service-db
+spec:
+  selector:
+    app: reward-mysql-app
+  ports:
+    - port: 3306
+      targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reward-mysql-deployment
+spec:
+  selector:
+    matchLabels:
+      app: reward-mysql-app
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: reward-mysql-app
+        tier: backend
+    spec:
+      containers:
+        - name: reward-mysql-app
+          image: mysql:5.7
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: reward-servicedb-login
+                  key: databaseName
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: reward-servicedb-login
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: reward-servicedb-login
+                  key: password
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: reward-servicedb-login
+                  key: rootPassword
+          volumeMounts:
+            - name: reward-data-volume
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: reward-data-volume
+          persistentVolumeClaim:
+            claimName: reward-service-mysql-pvc
