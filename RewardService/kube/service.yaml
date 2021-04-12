@@ -2,39 +2,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: questionnaire-deployment
+  name: reward-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: questionnaire-app
+      app: reward-app
       tier: backend
   template:
     metadata:
       labels:
-        app: questionnaire-app
+        app: reward-app
         tier: backend
     spec:
       containers:
-        - name: questionnaire-app
-          image: peshmerge/questionnaire-service:1.0.0
+        - name: reward-app
+          image: peshmerge/reward-service:1.0.0
           ports:
-            - containerPort: 9092
+            - containerPort: 9093
               name: service-port
           env:
-            - name: QUESTIONNAIRE_SERVICE_DB
-              value: questionnaire-service-db:3306/questionnaire_db?autoReconnect=true
-            - name: REWARD_SERVICE_HOST
-              value: http://reward-service/v1/rewards/
-            - name: QUESTIONNAIRE_SERVICE_DB_USER
+            - name: REWARD_SERVICE_DB
+              value: reward-service-db:3306/reward_db?autoReconnect=true
+            - name: REWARD_SERVICE_DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: questionnaire-servicedb-login
+                  name: reward-servicedb-login
                   key: username
-            - name: QUESTIONNAIRE_SERVICE_DB_PASS
+            - name: REWARD_SERVICE_DB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: questionnaire-servicedb-login
+                  name: reward-servicedb-login
                   key: password
           imagePullPolicy: Always
           livenessProbe:
@@ -48,13 +46,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: questionnaire-service
+  name: reward-service
 spec:
   selector:
-    app: questionnaire-app
+    app: reward-app
     tier: backend
   ports:
     - protocol: "TCP"
       port: 80
-      targetPort: 9092
+      targetPort: 9093
   type: ClusterIP
