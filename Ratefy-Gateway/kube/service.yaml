@@ -2,40 +2,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: feedback-deployment
+  name: ratefy-gateway-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: feedback-app
+      app: ratefy-gateway-app
       tier: backend
   template:
     metadata:
       labels:
-        app: feedback-app
+        app: ratefy-gateway-app
         tier: backend
     spec:
       containers:
-        - name: feedback-app
-          image: peshmerge/feedback-service:1.0.0
+        - name: ratefy-gateway-app
+          image: peshmerge/ratefy-gateway:1.0.0
           ports:
-            - containerPort: 9091
+            - containerPort: 9090
               name: service-port
           env:
-            - name: FEEDBACK_SERVICE_DB
-              value: feedback-service-db:3306/feedback_db?autoReconnect=true
-            - name: QUESTIONNAIRE_SERVICE_HOST
-              value: questionnaier-service:80/v1/questionnaires/
-            - name: FEEDBACK_SERVICE_DB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: feedback-servicedb-login
-                  key: username
-            - name: FEEDBACK_SERVICE_DB_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: feedback-servicedb-login
-                  key: password
+            - name: FEEDBACK_SERVICE_URL
+              value: feedback-service:80/v1/feedbacks/
+            - name: QUESTIONNAIRE_SERVICE_URL
+              value: feedback-service:80/v1/questionnaires/
+
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
@@ -48,13 +39,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: feedback-service
+  name: ratefy-gateway-service
 spec:
   selector:
-    app: feedback-app
+    app: ratefy-gateway-app
     tier: backend
   ports:
     - protocol: "TCP"
       port: 80
-      targetPort: 9091
-  type: ClusterIP
+      targetPort: 9090
+  type: LoadBalancer

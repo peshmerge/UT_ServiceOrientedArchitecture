@@ -12,6 +12,13 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class RatefyGatewayApplication {
 
+    @Value("${feedback-service-url}")
+    private String feedbackService;
+
+    @Value("${questionnaire-service-url}")
+    private String questionnaireService;
+
+
     public static void main(String[] args) {
         SpringApplication.run(RatefyGatewayApplication.class, args);
     }
@@ -22,12 +29,12 @@ public class RatefyGatewayApplication {
                 .route("feedback-service", r -> r
                         .path("/api/v1/feedbacks/**")
                         .filters(f -> f.stripPrefix(1))
-                        .uri("http://feedback-service:9091/v1/feedbacks/"))
+                        .uri(feedbackService))
 
                 .route("questionnaire-service", r -> r
                         .path("/api/v1/questionnaires/**")
                         .filters(f -> f.stripPrefix(1))
-                        .uri("http://localhost:9092/v1/questionnaires/"))
+                        .uri(questionnaireService))
 
                 .route("reward-service", r -> r
                         .path("/api/v1/rewards/**")

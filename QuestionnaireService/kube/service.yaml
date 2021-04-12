@@ -2,39 +2,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: feedback-deployment
+  name: questionnaire-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: feedback-app
+      app: questionnaire-app
       tier: backend
   template:
     metadata:
       labels:
-        app: feedback-app
+        app: questionnaire-app
         tier: backend
     spec:
       containers:
-        - name: feedback-app
-          image: peshmerge/feedback-service:1.0.0
+        - name: questionnaire-app
+          image: peshmerge/questionnaire-service:1.0.0
           ports:
-            - containerPort: 9091
+            - containerPort: 9092
               name: service-port
           env:
-            - name: FEEDBACK_SERVICE_DB
-              value: feedback-service-db:3306/feedback_db?autoReconnect=true
-            - name: QUESTIONNAIRE_SERVICE_HOST
-              value: questionnaier-service:80/v1/questionnaires/
-            - name: FEEDBACK_SERVICE_DB_USER
+            - name: QUESTIONNAIRE_SERVICE_DB
+              value: questionnaire-service-db:3306/questionnaire_db?autoReconnect=true
+            - name: QUESTIONNAIRE_SERVICE_DB_USER
               valueFrom:
                 secretKeyRef:
-                  name: feedback-servicedb-login
+                  name: questionnaire-servicedb-login
                   key: username
-            - name: FEEDBACK_SERVICE_DB_PASS
+            - name: QUESTIONNAIRE_SERVICE_DB_PASS
               valueFrom:
                 secretKeyRef:
-                  name: feedback-servicedb-login
+                  name: questionnaire-servicedb-login
                   key: password
           imagePullPolicy: Always
           livenessProbe:
@@ -48,13 +46,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: feedback-service
+  name: questionnaire-service
 spec:
   selector:
-    app: feedback-app
+    app: questionnaire-app
     tier: backend
   ports:
     - protocol: "TCP"
       port: 80
-      targetPort: 9091
+      targetPort: 9092
   type: ClusterIP

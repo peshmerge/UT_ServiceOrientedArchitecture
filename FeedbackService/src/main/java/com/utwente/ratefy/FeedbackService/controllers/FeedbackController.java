@@ -146,6 +146,8 @@ public class FeedbackController {
 
     private boolean questionnaireExists(int questionnaireId) {
         try {
+      System.out.println("Pesho");
+      System.out.println(questionnaireService + questionnaireId);
             ResponseEntity<Object> responseEntity = restTemplate.getForEntity(questionnaireService + questionnaireId, Object.class);
             return responseEntity.getStatusCode().is2xxSuccessful();
         } catch (HttpClientErrorException errorException) {

@@ -25,7 +25,7 @@ spec:
             - name: FEEDBACK_SERVICE_DB
               value: feedback-service-db:3306/feedback_db?autoReconnect=true
             - name: QUESTIONNAIRE_SERVICE_HOST
-              value: questionnaier-service:80/v1/questionnaires/
+              value: http://questionnaire-service/v1/questionnaires/
             - name: FEEDBACK_SERVICE_DB_USER
               valueFrom:
                 secretKeyRef:
@@ -57,4 +57,4 @@ spec:
     - protocol: "TCP"
       port: 80
       targetPort: 9091
-  type: LoadBalancer
+  type: ClusterIP
