@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: user_db
+      MYSQL_USER: user_db_user
+      MYSQL_PASSWORD: user_db_user_pass
+    ports:
+      - "6033:3306"
+    volumes:
+      - UserServiceData:/Users/hugos/Desktop/AsusHugo2020/Twente/2020/SOWS/Project/JavaWorkSpace/UserService
+volumes:
+  UserServiceData:
