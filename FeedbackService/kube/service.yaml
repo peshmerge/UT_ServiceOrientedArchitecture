@@ -24,6 +24,20 @@ spec:
           env:
             - name: FEEDBACK_SERVICE_DB
               value: feedback-service-db:3306/feedback_db?autoReconnect=true
+            - name: RABBITMQ_HOST
+              value: rabbitmq-service
+            - name: RABBITMQ_USER
+              value: guest
+            - name: RABBITMQ_PASS
+              value: guest
+            - name : RABBITMQ_PORT
+              value: 15672
+            - name : RABBITMQ_EXCHANGE
+              value: amq.direct
+            - name : RABBITMQ_FEEDBACKS_QUEUE
+              value: feedbacks.queue
+            - name : RABBITMQ_FEEDBACKS_ROUTING_KEY
+              value: feedback.routingkey
             - name: QUESTIONNAIRE_SERVICE_HOST
               value: http://questionnaire-service/v1/questionnaires/
             - name: FEEDBACK_SERVICE_DB_USER
@@ -40,7 +54,7 @@ spec:
           livenessProbe:
             httpGet:
               port: service-port
-              path: /actuator/health
+              path: /v1/feedbacks/actuator/health
             initialDelaySeconds: 20
             timeoutSeconds: 5
 ---

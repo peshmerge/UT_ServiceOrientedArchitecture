@@ -22,6 +22,10 @@ public class FeedbackSender {
   private String routingKey;
 
   public void send(Feedback feedback) {
-    rabbitTemplate.convertAndSend(exchange, routingKey, feedback);
+    try {
+      rabbitTemplate.convertAndSend(exchange, routingKey, feedback);
+    } catch (Exception e) {
+
+    }
   }
 }

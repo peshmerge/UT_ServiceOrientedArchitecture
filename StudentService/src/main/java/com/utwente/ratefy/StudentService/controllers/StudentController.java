@@ -4,7 +4,6 @@ import com.utwente.ratefy.StudentService.models.Feedback;
 import com.utwente.ratefy.StudentService.models.Student;
 import com.utwente.ratefy.StudentService.models.StudentDto;
 import com.utwente.ratefy.StudentService.models.StudentMapper;
-import com.utwente.ratefy.StudentService.mq.FeedbackSender;
 import com.utwente.ratefy.StudentService.services.IStudentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +37,6 @@ public class StudentController {
   @Autowired private StudentMapper studentMapper;
 
   @Autowired RestTemplate restTemplate;
-
-  @Autowired private FeedbackSender feedbackSender;
 
   @GetMapping
   @Operation(summary = "Get all students")
@@ -104,15 +100,8 @@ public class StudentController {
     if (optionalStudent.isEmpty()) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
-    Student updatedStudent = optionalStudent.get();
-    updatedStudent.setName(incomingStudent.getName());
-    updatedStudent.setStudentNumber(incomingStudent.getStudentNumber());
-    updatedStudent.setEmail(incomingStudent.getEmail());
-    updatedStudent.setOptIn(incomingStudent.getOptIn());
-    updatedStudent.setPoints(incomingStudent.getPoints());
-    updatedStudent.setUpdatedAt(Instant.now());
-    studentService.save(updatedStudent);
-    return ResponseEntity.status(HttpStatus.OK).body(studentMapper.toDto(updatedStudent));
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(studentMapper.toDto(studentService.update(incomingStudent, id)));
   }
 
   @DeleteMapping(path = "/{id}")
@@ -135,12 +124,14 @@ public class StudentController {
   @ApiResponse(
       responseCode = "204",
       description = "Feedback is given",
-      content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = Feedback.class)),
+      content = {
+        @Content(
+            mediaType = APPLICATION_JSON_VALUE,
+            schema = @Schema(implementation = Feedback.class)),
       })
   @PostMapping(path = "/feedback", consumes = APPLICATION_JSON_VALUE)
   public ResponseEntity giveFeedback(@Validated @Valid @RequestBody Feedback feedback) {
-    System.out.println(feedback);
-    feedbackSender.send(feedback);
+    studentService.giveFeedback(feedback);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
   }
 }

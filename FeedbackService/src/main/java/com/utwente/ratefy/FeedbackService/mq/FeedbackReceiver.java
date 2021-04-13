@@ -19,6 +19,10 @@ public class FeedbackReceiver implements RabbitListenerConfigurer {
 
   @RabbitListener(queues = "${spring.rabbitmq.queue}")
   public void receivedMessage(Feedback feedback) {
-    feedbackService.save(feedback);
+    try {
+      feedbackService.save(feedback);
+    } catch (Exception e) {
+
+    }
   }
 }

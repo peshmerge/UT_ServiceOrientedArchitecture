@@ -1,6 +1,13 @@
+version: "3.9"
+services:
+  rabbitmq-service:
+    image: rabbitmq:management
+    container_name: rabbitmq-service
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
-rabbitmq:
-  image: rabbitmq:management
-  ports:
-    - "5672:5672"
-    - "15672:15672"
+networks:
+  default:
+    external:
+      name: ratefy-network

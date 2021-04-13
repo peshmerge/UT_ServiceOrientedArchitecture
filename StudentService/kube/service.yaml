@@ -24,6 +24,24 @@ spec:
           env:
             - name: STUDENT_SERVICE_DB
               value: student-service-db:3306/student_db?autoReconnect=true
+            - name: QUESTIONNAIRE_SERVICE_HOST
+              value: http://questionnaire-service/v1/questionnaires/
+            - name: REWARD_SERVICE_HOST
+              value: http://reward-service/v1/rewards/
+            - name: RABBITMQ_HOST
+              value: rabbitmq-service
+            - name: RABBITMQ_USER
+              value: guest
+            - name: RABBITMQ_PASS
+              value: guest
+            - name: RABBITMQ_PORT
+              value: "15672"
+            - name: RABBITMQ_EXCHANGE
+              value: amq.direct
+            - name: RABBITMQ_FEEDBACKS_QUEUE
+              value: feedbacks.queue
+            - name: RABBITMQ_FEEDBACKS_ROUTING_KEY
+              value: feedback.routingkey
             - name: USER_SERVICE_DB_USER
               valueFrom:
                 secretKeyRef:

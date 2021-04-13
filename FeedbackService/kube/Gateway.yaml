@@ -38,3 +38,8 @@ spec:
             backend:
               serviceName: user-service
               servicePort: 80
+
+          - path: /mq/
+            backend:
+              serviceName: rabbitmq-service
+              servicePort: 15672
