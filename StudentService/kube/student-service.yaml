@@ -56,7 +56,7 @@ spec:
           livenessProbe:
             httpGet:
               port: service-port
-              path: /actuator/health
+              path: /v1/students/actuator/health
             initialDelaySeconds: 20
             timeoutSeconds: 5
 ---

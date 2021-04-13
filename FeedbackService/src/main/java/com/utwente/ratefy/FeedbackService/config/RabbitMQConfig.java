@@ -32,6 +32,20 @@ public class RabbitMQConfig {
   private String host;
 
   @Bean
+  Queue queue() {
+    return new Queue(queue, true);
+  }
+
+  @Bean
+  Exchange myExchange() {
+    return ExchangeBuilder.directExchange(exchange).durable(true).build();
+  }
+
+  @Bean
+  Binding binding() {
+    return BindingBuilder.bind(queue()).to(myExchange()).with(routingKey).noargs();
+  }
+  @Bean
   CachingConnectionFactory connectionFactory() {
     CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory(host);
     cachingConnectionFactory.setUsername(username);

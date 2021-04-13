@@ -1,0 +1,927 @@
+{
+	"info": {
+		"_postman_id": "42582732-940f-4d6f-911a-760cfa312ff2",
+		"name": "Ratefy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Feedbacks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/feedbacks/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"feedbacks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/users/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Rewards",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/rewards/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"rewards",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Schedules",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/schedules/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"schedules",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questionnaires",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/questionnaires",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"questionnaires"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Students",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/students/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"students",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Feedback",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/feedbacks/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"feedbacks",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/users/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Reward",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/rewards/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"rewards",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Schedule",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/schedules/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"schedules",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Questionnaire",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/questionnaires/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"questionnaires",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/students/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"students",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Feedback",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/feedbacks/4",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"feedbacks",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Schedule",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/schedules/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"schedules",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Reward",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/rewards/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"rewards",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Questionnaire",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/questionnaires/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"questionnaires",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Users",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/users/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Student",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://ratefy.dev/v1/students/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"students",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Feedback",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": [\n                    {\n                         \"question_id\": 1,\n                         \"answer\": \"The course was good enough\"\n                     },\n                    {\n                         \"question_id\":2,\n                         \"answer\": \"The teacher was great\"\n                     },\n                    {\n                         \"question_id\":3,\n                         \"answer\": \"The workload was immense\"\n                     },\n                    {\n                         \"question_id\":4,\n                         \"answer\": \"10\"\n                     }    \n        ],\n        \"student_id\": 1,\n        \"questionnaire_id\": 1\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/feedbacks/3",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"feedbacks",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Reward",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"value\": 1,\n  \"title\": \"For all students who answer questionnaire 1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/rewards/3",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"rewards",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Questionnaire",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"This is questionnaire number 2\",\n    \"content\": [\n                    {\n                         \"question_id\": 1,\n                         \"question\": \"How good was the course?\"\n                     },\n                    {\n                         \"question_id\":2,\n                         \"question\": \"How great was the teacher?\"\n                     },\n                    {\n                         \"question_id\":3,\n                         \"question\": \"Was the workload easy?\"\n                     },\n                    {\n                         \"question_id\": \"Give the course rate from 1 to 10\",\n                         \"question\": \"8\"\n                     }    \n        ],\n    \"reward_id\": 1,\n    \"user_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/feedbacks/3",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"feedbacks",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Admin1111\",\n  \"email\": \"admin@ut.nl\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/users/1",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Student",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"student_number\": 2223652,\n  \"name\": \"Hugo Smits\",\n  \"email\": \"hugo@ut.nl\",\n  \"points\": 0,\n  \"opt-in\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/students/2",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"students",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Feedbacks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": [\n                    {\n                         \"question_id\": 1,\n                         \"answer\": \"The course was good enough\"\n                     },\n                    {\n                         \"question_id\":2,\n                         \"answer\": \"The teacher was great\"\n                     },\n                    {\n                         \"question_id\":3,\n                         \"answer\": \"The workload was immense\"\n                     },\n                    {\n                         \"question_id\":4,\n                         \"answer\": \"8\"\n                     }    \n        ],\n        \"student_id\": 1,\n        \"questionnaire_id\": 2\n    \n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/feedbacks/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"feedbacks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Schedule",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"student_id\": 0,\n  \"event_name\": \"Tutorial Class\",\n  \"course_name\": \"Service Oriented Architecture\",\n  \"start_time\": \"2021-04-12T13:25:20.383Z\",\n  \"end_time\": \"2021-04-12T15:25:20.383Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/schedules/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"schedules",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Reward",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"value\": 10,\n  \"title\": \"For all students who answer questionnaire 1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/rewards/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"rewards",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Admin\",\n  \"email\": \"admin@ut.nl\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/users/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Student",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"student_number\": 5658563,\n  \"name\": \"Peshmerge Morad\",\n  \"email\": \"peshmerge@ut.nl\",\n  \"points\": 0,\n  \"opt-in\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/students/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"students",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student Gives feedback",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": [\n                    {\n                         \"question_id\": 1,\n                         \"answer\": \"The course was good enough\"\n                     },\n                    {\n                         \"question_id\":2,\n                         \"answer\": \"The teacher was great\"\n                     },\n                    {\n                         \"question_id\":3,\n                         \"answer\": \"The workload was immense\"\n                     },\n                    {\n                         \"question_id\":4,\n                         \"answer\": \"8\"\n                     }    \n        ],\n        \"student_id\": 1,\n        \"questionnaire_id\": 1\n    \n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/students/feedback",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"students",
+						"feedback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Questionnaire",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"This is questionnaire number 1\",\n    \"content\": [\n                    {\n                         \"question_id\": 1,\n                         \"question\": \"How good was the course?\"\n                     },\n                    {\n                         \"question_id\":2,\n                         \"question\": \"How great was the teacher?\"\n                     },\n                    {\n                         \"question_id\":3,\n                         \"question\": \"Was the workload easy?\"\n                     },\n                    {\n                         \"question_id\": 4,\n                         \"question\": \"Give the course rate from 1 to 10\"\n                     }    \n        ],\n    \"reward_id\": 1,\n    \"user_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/questionnaires/",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"questionnaires",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
