@@ -24,6 +24,20 @@ spec:
           env:
             - name: USER_SERVICE_DB
               value: user-service-db:3306/user_db?autoReconnect=true
+            - name: RABBITMQ_HOST
+              value: rabbitmq-service
+            - name: RABBITMQ_USER
+              value: guest
+            - name: RABBITMQ_PASS
+              value: guest
+            - name: RABBITMQ_PORT
+              value: "15672"
+            - name: RABBITMQ_EXCHANGE
+              value: amq.direct
+            - name: RABBITMQ_QUESTIONNAIRES_QUEUE
+              value: questionnaires.queue
+            - name: RABBITMQ_QUESTIONNAIRES_ROUTING_KEY
+              value: questionnaire.routingkey
             - name: USER_SERVICE_DB_USER
               valueFrom:
                 secretKeyRef:

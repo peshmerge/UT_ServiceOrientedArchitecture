@@ -1,6 +1,7 @@
 package com.utwente.ratefy.UserService.controllers;
 
 import com.utwente.ratefy.UserService.exceptions.LastUserDeletionException;
+import com.utwente.ratefy.UserService.models.Questionnaire;
 import com.utwente.ratefy.UserService.models.User;
 import com.utwente.ratefy.UserService.models.UserDto;
 import com.utwente.ratefy.UserService.models.UserMapper;
@@ -127,6 +128,21 @@ public class UserController {
       throw new LastUserDeletionException(id);
     }
     userService.deleteById(id);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+  }
+  
+  @Operation(summary = "Crate a new Questionnaire")
+  @ApiResponse(
+          responseCode = "204",
+          description = "Feedback is given",
+          content = {
+                  @Content(
+                          mediaType = APPLICATION_JSON_VALUE,
+                          schema = @Schema(implementation = Questionnaire.class)),
+          })
+  @PostMapping(path = "/questionnaire", consumes = APPLICATION_JSON_VALUE)
+  public ResponseEntity createQuestionnaire(@Validated @Valid @RequestBody Questionnaire questionnaire) {
+    userService.createQuestionnaire(questionnaire);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
   }
 }

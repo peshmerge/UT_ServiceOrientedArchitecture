@@ -120,7 +120,7 @@ public class StudentController {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
   }
 
-  @Operation(summary = "Crate a new Student")
+  @Operation(summary = "Crate a new Feedback")
   @ApiResponse(
       responseCode = "204",
       description = "Feedback is given",

@@ -1,5 +1,6 @@
 package com.utwente.ratefy.UserService.services;
 
+import com.utwente.ratefy.UserService.models.Questionnaire;
 import com.utwente.ratefy.UserService.models.User;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface IUserService {
     User save(User user);
 
     void deleteById(Integer id);
+
+    void createQuestionnaire(Questionnaire questionnaire);
 }
