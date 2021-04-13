@@ -922,6 +922,169 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "User Create a Questionnaire",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"This is questionnaire number 5555650\",\n    \"content\": [\n                    {\n                         \"question_id\": 1,\n                         \"question\": \"How good was the course?\"\n                     },\n                    {\n                         \"question_id\":2,\n                         \"question\": \"How great was the teacher?\"\n                     },\n                    {\n                         \"question_id\":3,\n                         \"question\": \"Was the workload easy?\"\n                     },\n                    {\n                         \"question_id\": 4,\n                         \"question\": \"Give the course rate from 1 to 10\"\n                     }    \n        ],\n    \"reward_id\": 1,\n    \"user_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ratefy.dev/v1/users/questionnaire",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"users",
+						"questionnaire"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Feedback Service health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ratefy.dev/v1/feedbacks/actuator",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"feedbacks",
+						"actuator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Questionnaire Service health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ratefy.dev/v1/questionnaires/actuator",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"questionnaires",
+						"actuator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schedule Service health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ratefy.dev/v1/schedules/actuator",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"schedules",
+						"actuator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Service health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ratefy.dev/v1/users/actuator",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"users",
+						"actuator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Student Service health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ratefy.dev/v1/students/actuator",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"students",
+						"actuator"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reward Service health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ratefy.dev/v1/rewards/actuator",
+					"protocol": "http",
+					"host": [
+						"ratefy",
+						"dev"
+					],
+					"path": [
+						"v1",
+						"rewards",
+						"actuator"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

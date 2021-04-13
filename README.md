@@ -12,7 +12,7 @@ of Twente. This is a project for the course Service-oriented Architecture Web Se
 * Postman client to be able to call the endpoints and test the application. To be able to fully test the endpoints, the
 hostname ratefy.dev is used. `xxx.xxx.xxx.xxx   ratefy.dev` must be added to the hosts file on the local machine.
   The xxx.xxx.xxx.xxx is the ip address of the minikube cluster which can be obtained from the command line by executing 
-  `minikube ip`.
+  `minikube ip`. Using Swagger instead of Postman is also an option :) .
 
 The project consists of the following services:
 * Feedback Service
@@ -21,7 +21,7 @@ The project consists of the following services:
 * Schedule Service
 * User Service
 * Student Service
-* rabbitMQ service for managing the asynchronous communication between the student-service and the feedback-service.
+* RabbitMQ service for managing the asynchronous communication between the student-service and the feedback-service.
 
 Each service has its own directory, and each service has the following component:
 * The java + spring boot source code
@@ -61,6 +61,11 @@ Don't forget create the ratefy-gateway. Within the folder of feedback-service/ku
 * The RabbitMQ from rabbitMQ folder
   `kubectl apply -f mq-config.yaml` and `mq-deployment.yaml`
 
+### Kubernetes (minikube) dashboard
+Here is a screenshot of Minikube dashboard with all running services inside. All services run smoothly without any error.
+![RabbitMQ dashboard](minikube-dashboard.png "RabbitMQ dashboard")
+
+
 ### RabbitMQ dashboard
 The rabbitmq-service has type NodPort which means it's accessible using the ip-address of the cluster with the assigned
 port. Execute the following command from the command-line to reveal which port is assigned to the rabbitmq dashboard.
@@ -71,11 +76,13 @@ port. Execute the following command from the command-line to reveal which port i
 
 ### Postman collection
 Please use the file `Ratefy.postman_collection.json` to import all endpoints.
+This collection contains all endpoints of Ratefy including the health-check endpoints per service. 
 ![Ratefy postman collection](Ratefy_postman_collection.png "Ratefy postman collection")
 
 ### Swagger ui
 Each service has also a swagger ui. It can be accessed by using the ip-address of the minikube cluster, or the domain
 ratefy.dev if you have already added it to your hosts file.
-`http://192.168.49.2/v1/feedbacks/swagger-ui/index.html?configUrl=/v1/feedbacks/api-docs/swagger-config#/`
+http://192.168.49.2/v1/feedbacks/swagger-ui/index.html?configUrl=/v1/feedbacks/api-docs/swagger-config#/ .
+
 **Note** we have used feedbacks (plural). For student service, you have to use students and so on.
 ![Swagger for Student service](swagger.png "Swagger for Student service")
