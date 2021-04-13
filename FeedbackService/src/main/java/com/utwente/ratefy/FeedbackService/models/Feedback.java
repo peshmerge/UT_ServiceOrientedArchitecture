@@ -9,6 +9,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +24,7 @@ import javax.validation.constraints.NotNull;
         @TypeDef(name = "json", typeClass = JsonStringType.class),
         @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 })
-public class Feedback {
+public class Feedback implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -144,7 +145,6 @@ public class Feedback {
         sb.append(", content=").append(content).append('\'');
         sb.append(", studentId=").append(studentId).append('\'');
         sb.append(", questionnaireId=").append(questionnaireId).append('\'');
-
         sb.append('}');
         return sb.toString();
     }

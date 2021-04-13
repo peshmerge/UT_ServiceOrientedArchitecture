@@ -1,8 +1,10 @@
 package com.utwente.ratefy.StudentService.controllers;
 
+import com.utwente.ratefy.StudentService.models.Feedback;
 import com.utwente.ratefy.StudentService.models.Student;
 import com.utwente.ratefy.StudentService.models.StudentDto;
 import com.utwente.ratefy.StudentService.models.StudentMapper;
+import com.utwente.ratefy.StudentService.mq.FeedbackSender;
 import com.utwente.ratefy.StudentService.services.IStudentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -37,6 +39,8 @@ public class StudentController {
   @Autowired private StudentMapper studentMapper;
 
   @Autowired RestTemplate restTemplate;
+
+  @Autowired private FeedbackSender feedbackSender;
 
   @GetMapping
   @Operation(summary = "Get all students")
@@ -124,6 +128,19 @@ public class StudentController {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
     studentService.deleteById(id);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+  }
+
+  @Operation(summary = "Crate a new Student")
+  @ApiResponse(
+      responseCode = "204",
+      description = "Feedback is given",
+      content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = Feedback.class)),
+      })
+  @PostMapping(path = "/feedback", consumes = APPLICATION_JSON_VALUE)
+  public ResponseEntity giveFeedback(@Validated @Valid @RequestBody Feedback feedback) {
+    System.out.println(feedback);
+    feedbackSender.send(feedback);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
   }
 }

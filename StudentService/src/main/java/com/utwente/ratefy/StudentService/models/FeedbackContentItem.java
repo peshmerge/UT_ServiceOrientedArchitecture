@@ -1,11 +1,13 @@
-package com.utwente.ratefy.FeedbackService.models;
+package com.utwente.ratefy.StudentService.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@Component
 @Data
 public class FeedbackContentItem implements Serializable {
 

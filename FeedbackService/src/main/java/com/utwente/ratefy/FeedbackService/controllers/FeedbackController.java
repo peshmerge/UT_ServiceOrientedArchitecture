@@ -1,6 +1,5 @@
 package com.utwente.ratefy.FeedbackService.controllers;
 
-import com.utwente.ratefy.FeedbackService.exceptions.QuestionnaireNotFoundException;
 import com.utwente.ratefy.FeedbackService.models.Feedback;
 import com.utwente.ratefy.FeedbackService.models.FeedbackDto;
 import com.utwente.ratefy.FeedbackService.models.FeedbackMapper;
@@ -12,14 +11,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.time.Instant;
@@ -39,11 +34,6 @@ public class FeedbackController {
   @Autowired private IFeedbackService feedbackService;
 
   @Autowired private FeedbackMapper feedbackMapper;
-
-  @Autowired RestTemplate restTemplate;
-
-  @Value("${questionnaire-service-host}")
-  String questionnaireService;
 
   @GetMapping
   @Operation(summary = "Get all feedbacks")
@@ -83,10 +73,8 @@ public class FeedbackController {
       })
   @PostMapping(consumes = APPLICATION_JSON_VALUE)
   public ResponseEntity<FeedbackDto> createFeedback(
-      @Validated @Valid @RequestBody Feedback feedback) throws ResponseStatusException {
-    if (!questionnaireExists(feedback.getQuestionnaireId())) {
-      throw new QuestionnaireNotFoundException(feedback.getQuestionnaireId());
-    }
+      @Validated @Valid @RequestBody Feedback feedback) {
+
     final Feedback createdFeedback = feedbackService.save(feedback);
     return ResponseEntity.status(HttpStatus.CREATED).body(feedbackMapper.toDto(createdFeedback));
   }
@@ -134,15 +122,5 @@ public class FeedbackController {
     }
     feedbackService.deleteById(id);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-  }
-
-  private boolean questionnaireExists(int questionnaireId) {
-    try {
-      ResponseEntity<Object> responseEntity =
-          restTemplate.getForEntity(questionnaireService + questionnaireId, Object.class);
-      return responseEntity.getStatusCode().is2xxSuccessful();
-    } catch (HttpClientErrorException errorException) {
-      return false;
-    }
   }
 }
