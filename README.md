@@ -77,6 +77,8 @@ port. Execute the following command from the command-line to reveal which port i
 ### Postman collection
 Please use the file `Ratefy.postman_collection.json` to import all endpoints.
 This collection contains all endpoints of Ratefy including the health-check endpoints per service. 
+
+
 ![Ratefy postman collection](Ratefy_postman_collection.png "Ratefy postman collection")
 
 ### Swagger ui
